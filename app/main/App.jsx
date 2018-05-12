@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
-
 import UserList from '../components/UserList'
+
+import '../static/style.scss'
+import 'modules/bootstrap/scss/bootstrap.scss'
 
 class App extends React.Component {
     constructor() {
@@ -25,8 +27,10 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>GITHUB API GET</h1>
+            <div className='container'>
+                <div className='jumbotron'>
+                    <h1>GITHUB API GET</h1>
+                </div>
                 <UserList list={this.state.list} />
             </div>
         )
