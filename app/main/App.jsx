@@ -1,35 +1,58 @@
 import React from 'react'
-import axios from 'axios'
-
-import UserList from '../components/UserList'
 
 class App extends React.Component {
     constructor() {
-        super()
+        super();
         this.state = {
+            user: {
+                name: '',
+                email: '',
+            },
             list: []
         }
+     
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        axios.get('https://api.github.com/users')
-            .then(response => {
-                this.setState({
-                    list: response.data
-                })
-            })
-            .catch(err => {
-                console.log(err)
-            });
+    handleChange(event) {
+        const field = event.target.name;
+        const value = event.target.value;
+
+        const user = this.state.user;   
+       
+        user[field] = value;
+
+        this.setState({ user })
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const newUser = {
+            name: '',
+            email: '',
+        }
+
+        const user = this.state.user;
+        const list = this.state.list;
+
+        list.push(user);
+
+        this.setState({ list, user: newUser });
     }
 
     render() {
         return (
-            <div>
-                <h1>GITHUB API GET</h1>
-                <UserList list={this.state.list} />
-            </div>
-        )
+            <form onSubmit={this.handleSubmit}>
+                <input value={this.state.user.name} onChange={this.handleChange}  name='name' />
+                <input value={this.state.user.email} onChange={this.handleChange} name='email' />
+
+                <input type='submit' value='Enviar' />
+
+                {console.log(this.state.list)}
+            </form>
+        );
     }
 }
 

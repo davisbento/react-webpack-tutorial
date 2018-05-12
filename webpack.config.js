@@ -1,6 +1,4 @@
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const webpack = require('webpack')
 
 module.exports = {
     entry: {
@@ -28,7 +26,6 @@ module.exports = {
     },
     devServer: {
         contentBase: './build',
-        port: 4000,
-        historyApiFallback: true
+        port: 4000
     }
 }
